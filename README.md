@@ -5,15 +5,15 @@
 </div>
 
 # Cyclelytics
-Turn bike-share data into trustworthy insights with lightweight cloud pipelines and dashboards.
+Turning bike-share data into insights with lightweight cloud pipelines and an intuitive dashboard.
 
 ## What is Cyclelytics?
-Cyclelytics is a data and analytics starter for bike-share systems. Inspired by public mobility analytics projects like NYC Citi Bike reports and Chicago Divvy data deep-dives, it wraps modern extract-transform-load (ETL) patterns with a clear place to stage dashboards and documentation.
+Cyclelytics is a data and analytics starter for bike-share systems. Inspired by public mobility analytics projects like NYC Citi Bike reports and Chicago Divvy data deep-dives, it wraps modern extract-transform-load (ETL) patterns with a clear place to stage a dashboard and documentation.
 
 ## Highlights
 - End-to-end flow: extract raw trip data, transform for quality and usability, and load curated tables ready for BI.
 - Readable modular code: `src/extract`, `src/transform`, and `src/load` mirror the pipeline stages.
-- Future dashboards: reserved gallery space for KPI snapshots, route maps, and trend visuals.
+- Future dashboard: reserved gallery space for KPI snapshots, route maps, and trend visuals.
 - Docs-first mindset: architecture notes and screenshots live in `docs/` to keep data decisions transparent.
 
 ## Repository Layout
