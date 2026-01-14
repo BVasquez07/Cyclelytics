@@ -2,5 +2,8 @@ pandas
 numpy
 pyarrow
 psycopg[binary]
-aiohttp[speedups]
+aiohttp
 fastparquet
+python-dotenv
+pytest
+pytest-cov

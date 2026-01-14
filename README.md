@@ -1,3 +1,9 @@
+<div align="center">
+
+![Cyclelytics Logo](docs/assets/Cyclelytics.png)
+
+</div>
+
 # Cyclelytics
 Turn bike-share data into trustworthy insights with lightweight cloud pipelines and dashboards.
 
@@ -40,7 +46,7 @@ Cyclelytics is a data and analytics starter for bike-share systems. Inspired by 
 ## Documentation Screenshots (coming soon)
 - Use `docs/` for architecture diagrams, sequence charts, or modeling notes.
 - Current capture:
-	- High-level architecture – `docs/architecture/Cyclelytics.png`
+  ![High-level architecture](docs/architecture/Cyclelytics.png)
 - Add more captures like sequence diagrams or data model glossaries in `docs/` and link them here.
 
 ## Roadmap
