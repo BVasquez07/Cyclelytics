@@ -2,6 +2,9 @@ from dotenv import load_dotenv
 import os
 #will be refrencing the GBFS from the city bike data source found here: https://github.com/MobilityData/gbfs/blob/master/gbfs.md
 
+#can also check if there is a venv directory and create one if not found
+
+
 try:
     with open('.env', 'r') as f:
         pass # we don't really care to do anything if the file exists and the file will close automatically due to the with statement

@@ -1,8 +1,5 @@
 import asyncio
 import aiohttp
-
-
-
 """
 TODO: 
 - implement error handling, logging, and retries for robustness
@@ -11,9 +8,7 @@ TODO:
 
 """
 
-
-
-async def fetch_gbfs_data(url='https://gbfs.lyft.com/gbfs/2.3/bkn/gbfs.json', batch_size=100):
+async def fetch_gbfs_data(url: str='https://gbfs.lyft.com/gbfs/2.3/bkn/gbfs.json', batch_size: int=100):
     print(url)
     async with aiohttp.ClientSession() as session:
         try:
@@ -24,5 +19,4 @@ async def fetch_gbfs_data(url='https://gbfs.lyft.com/gbfs/2.3/bkn/gbfs.json', ba
             return None
 
 if __name__ == "__main__":
-    print('hello world')
     asyncio.run(fetch_gbfs_data)

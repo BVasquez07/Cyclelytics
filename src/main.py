@@ -15,6 +15,8 @@ is effectively the same as invoking a regular, synchronous Python function. Cons
 TODO:
 - implement transform and load phases of the ETL process
 - in the transform phase we will be using the geopandas toi make the borough paritions
+- need to merge the data from the various portions of the GBFS feed into a cohesive dataset
+
 
 
 """
@@ -24,6 +26,7 @@ import numpy as np
 from src.extract.fetch_gbfs_data import fetch_gbfs_data
 
 async def run_etl(feed, batch_size: int =100, db_credentials: dict[dict[str]]=None) -> None:
+    #extract portion
     feed_tasks = [{}] #list of dicts to hold tasks for each task feed to simplify management
     async with asyncio.TaskGroup() as tg:
         for en_feed_key, en_feed_url in feed['feeds']['en'].items():
@@ -31,6 +34,28 @@ async def run_etl(feed, batch_size: int =100, db_credentials: dict[dict[str]]=No
     for task_name, task in feed_tasks[0].items():
         feed_tasks[0][task_name] = task.result()
 
+    station_info_df = pd.DataFrame(feed_tasks[0]['station_information']['data']['stations'])
+    station_status_df = pd.DataFrame(feed_tasks[0]['station_status']['data']['stations'])
+    vehicle_types_df = pd.DataFrame(feed_tasks[0]['data']['vehicle_types'])
+
+
+    """
+    TODO:
+    [] join all of the data that is relevant into one cohesive dataframe
+        - the three to be joined are station info, station status, and vehicle_types
+    [] create the parquet file(s) from the dataframe
+    [] store the parquet file(s) into the s3 data lake
+    """
+
+    
+
+
+    #transform portion
+
+
+
+
+    #load portion
     
     
     #further ETL steps would go here: transform and load phases
