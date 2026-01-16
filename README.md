@@ -8,7 +8,7 @@
 Turning bike-share data into insights with lightweight cloud pipelines and an intuitive dashboard.
 
 ## What is Cyclelytics?
-Cyclelytics is a data and analytics starter for bike-share systems. Inspired by public mobility analytics projects like NYC Citi Bike reports and Chicago Divvy data deep-dives, it wraps modern extract-transform-load (ETL) patterns with a clear place to stage dashboard and documentation.
+Cyclelytics is a data and analytics starter for bike-share systems. Inspired by public mobility analytics projects like NYC Citi Bike reports and Chicago Divvy data deep-dives, it wraps modern extract-transform-load (ETL) patterns with a clear place to stage a dashboard and documentation.
 
 ## Highlights
 - End-to-end flow: extract raw trip data, transform for quality and usability, and load curated tables ready for BI.
