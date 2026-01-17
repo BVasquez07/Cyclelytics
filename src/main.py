@@ -25,6 +25,8 @@ import asyncio
 import pandas as pd
 import numpy as np
 from src.extract.fetch_gbfs_data import fetch_gbfs_data
+import tempfile
+import fastparquet
 
 async def run_etl(feed, batch_size: int =100, db_credentials: dict[dict[str]]=None) -> None:
     #extract portion
@@ -38,7 +40,6 @@ async def run_etl(feed, batch_size: int =100, db_credentials: dict[dict[str]]=No
 
     station_info_df = pd.DataFrame(feed_tasks[0]['station_information']['data']['stations'])
     station_status_df = pd.DataFrame(feed_tasks[0]['station_status']['data']['stations'])
-
     # status_exploded = station_status_df.explode('vehicle_types_available')
     # print(status_exploded.head())
     # status_normalized = pd.json_normalize(status_exploded['vehicle_types_available'])
@@ -47,8 +48,22 @@ async def run_etl(feed, batch_size: int =100, db_credentials: dict[dict[str]]=No
 
     vehicle_types_df = pd.DataFrame(feed_tasks[0]['vehicle_types']['data']['vehicle_types']) #can't merge t5his in until the vehicle types data is fixed!
     joined = station_info_df.merge(station_status_df, on='station_id', how='outer')
+
+    print(joined.info())
+    print(joined.describe())
     print(joined.shape)
-    print(joined[joined['station_id']=='d18512f9-52c8-4175-92b9-b6258dc30748'].T)
+    #creating the parquet files from the dataframe.
+
+    with tempfile.TemporaryDirectory() as temp_dir:
+        temp_file_path = f"{temp_dir}/temp_parquet.parquet"
+        try:
+            joined.to_parquet(temp_file_path, index=False, engine='fastparquet')
+            loaded_df = pd.read_parquet(temp_file_path, engine='fastparquet')
+        except Exception as e:
+            print(f"Error creating or loading parquet file: {e}")
+            raise e
+        finally:
+            print(loaded_df.head().T)
 
 
 
