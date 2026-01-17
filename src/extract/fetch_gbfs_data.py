@@ -13,7 +13,7 @@ async def fetch_gbfs_data(url: str='https://gbfs.lyft.com/gbfs/2.3/bkn/gbfs.json
     async with aiohttp.ClientSession() as session:
         try:
             async with session.get(url) as response:
-                    return await response.json()
+                    return await response.json() #have to check this over to make sure the event loop is getting back the control
         except Exception as e:
             print(f"Error fetching data from {url}: {e}")
             return None

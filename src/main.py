@@ -16,6 +16,7 @@ TODO:
 - implement transform and load phases of the ETL process
 - in the transform phase we will be using the geopandas toi make the borough paritions
 - need to merge the data from the various portions of the GBFS feed into a cohesive dataset
+- fix: the vehicle types data not coming in properly in the station status json
 
 
 
@@ -27,6 +28,7 @@ from src.extract.fetch_gbfs_data import fetch_gbfs_data
 
 async def run_etl(feed, batch_size: int =100, db_credentials: dict[dict[str]]=None) -> None:
     #extract portion
+    #there is an error with the vehicle types that doesn't come in!
     feed_tasks = [{}] #list of dicts to hold tasks for each task feed to simplify management
     async with asyncio.TaskGroup() as tg:
         for en_feed_key, en_feed_url in feed['feeds']['en'].items():
@@ -36,13 +38,25 @@ async def run_etl(feed, batch_size: int =100, db_credentials: dict[dict[str]]=No
 
     station_info_df = pd.DataFrame(feed_tasks[0]['station_information']['data']['stations'])
     station_status_df = pd.DataFrame(feed_tasks[0]['station_status']['data']['stations'])
-    vehicle_types_df = pd.DataFrame(feed_tasks[0]['data']['vehicle_types'])
+
+    # status_exploded = station_status_df.explode('vehicle_types_available')
+    # print(status_exploded.head())
+    # status_normalized = pd.json_normalize(status_exploded['vehicle_types_available'])
+    # station_status_df = pd.concat([station_status_df.drop(columns=['vehicle_types_available']), status_normalized], axis=1)
+    # print(station_status_df.head().T)
+
+    vehicle_types_df = pd.DataFrame(feed_tasks[0]['vehicle_types']['data']['vehicle_types']) #can't merge t5his in until the vehicle types data is fixed!
+    joined = station_info_df.merge(station_status_df, on='station_id', how='outer')
+    print(joined.shape)
+    print(joined[joined['station_id']=='d18512f9-52c8-4175-92b9-b6258dc30748'].T)
+
 
 
     """
     TODO:
-    [] join all of the data that is relevant into one cohesive dataframe
+    [x] join all of the data that is relevant into one cohesive dataframe
         - the three to be joined are station info, station status, and vehicle_types
+        -still have to 
     [] create the parquet file(s) from the dataframe
     [] store the parquet file(s) into the s3 data lake
     """
