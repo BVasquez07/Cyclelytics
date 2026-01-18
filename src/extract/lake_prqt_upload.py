@@ -22,7 +22,7 @@ async def create_and_upload_parquet(df: pd.DataFrame, s3_config_obj: dict, file_
             df.to_parquet(temp_file_path, index=False, engine='fastparquet')
         except Exception as e:
             return f"Error creating parquet file: {e}"
-        finally:
+        else:
             s3 = boto3.client('s3', config=s3_config_obj['botocore_config'])
 
             try:
