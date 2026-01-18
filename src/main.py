@@ -43,7 +43,7 @@ async def run_etl(feed, batch_size: int =100, db_credentials: dict[dict[str]]=No
     # station_status_df = pd.concat([station_status_df.drop(columns=['vehicle_types_available']), status_normalized], axis=1)
     # print(station_status_df.head().T)
 
-    vehicle_types_df = pd.DataFrame(feed_tasks[0]['vehicle_types']['data']['vehicle_types']) #can't merge t5his in until the vehicle types data is fixed!
+    vehicle_types_df = pd.DataFrame(feed_tasks[0]['vehicle_types']['data']['vehicle_types']) #can't merge this in until the vehicle types data is fixed!
     joined = station_info_df.merge(station_status_df, on='station_id', how='outer')
 
     print(joined.info())
