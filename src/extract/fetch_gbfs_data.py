@@ -8,7 +8,7 @@ TODO:
 
 """
 
-async def fetch_gbfs_data(url: str='https://gbfs.lyft.com/gbfs/2.3/bkn/gbfs.json', batch_size: int=100):
+async def fetch_gbfs_data(url: str='https://gbfs.lyft.com/gbfs/2.3/bkn/gbfs.json', batch_size: int=100) -> dict | None:
     print(url)
     async with aiohttp.ClientSession() as session:
         try:
