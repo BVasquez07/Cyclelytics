@@ -14,7 +14,7 @@ is effectively the same as invoking a regular, synchronous Python function.
 
 TODO:
 - implement transform and load phases of the ETL process
-- in the transform phase we will be using the geopandas toi make the borough paritions
+- in the transform phase we will be using the geopandas to make the borough paritions
 - need to merge the data from the various portions of the GBFS feed into a cohesive dataset
 - fix: the vehicle types data not coming in properly in the station status json
 - restructure to make suire that event loop management is proper and efficient and concurrency is being used effectively!
@@ -23,7 +23,6 @@ import asyncio
 import pandas as pd
 from src.extract.fetch_gbfs_data import fetch_gbfs_data
 from src.extract.lake_prqt_upload import create_and_upload_parquet
-import fastparquet
 import time
 
 async def run_etl(feed, batch_size: int =100, db_credentials: dict[dict[str]]=None, s3_config_obj: object=None) -> None:
@@ -44,7 +43,7 @@ async def run_etl(feed, batch_size: int =100, db_credentials: dict[dict[str]]=No
     # station_status_df = pd.concat([station_status_df.drop(columns=['vehicle_types_available']), status_normalized], axis=1)
     # print(station_status_df.head().T)
 
-    vehicle_types_df = pd.DataFrame(feed_tasks[0]['vehicle_types']['data']['vehicle_types']) #can't merge t5his in until the vehicle types data is fixed!
+    vehicle_types_df = pd.DataFrame(feed_tasks[0]['vehicle_types']['data']['vehicle_types']) #can't merge this in until the vehicle types data is fixed!
     joined = station_info_df.merge(station_status_df, on='station_id', how='outer')
 
     print(joined.info())
