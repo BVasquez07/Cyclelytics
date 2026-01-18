@@ -17,7 +17,7 @@ TODO:
 - in the transform phase we will be using the geopandas to make the borough paritions
 - need to merge the data from the various portions of the GBFS feed into a cohesive dataset
 - fix: the vehicle types data not coming in properly in the station status json
-- restructure to make suire that event loop management is proper and efficient and concurrency is being used effectively!
+- restructure to make sure that event loop management is proper and efficient and concurrency is being used effectively!
 """
 import asyncio
 import pandas as pd
