@@ -1,4 +1,4 @@
-#this file will hanbdle making the parquet files and pushing them to the s3 data lake as parquet files
+#this file will handle making the parquet files and pushing them to the s3 data lake as parquet files
 import asyncio
 import pandas as pd
 import tempfile
