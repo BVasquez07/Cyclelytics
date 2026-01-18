@@ -22,7 +22,6 @@ import asyncio
 import pandas as pd
 from src.extract.fetch_gbfs_data import fetch_gbfs_data
 from src.extract.lake_prqt_upload import create_and_upload_parquet
-import fastparquet
 import time
 
 async def run_etl(feed, batch_size: int =100, db_credentials: dict[dict[str]]=None, s3_config_obj: object=None) -> None:
