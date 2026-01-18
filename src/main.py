@@ -14,7 +14,7 @@ is effectively the same as invoking a regular, synchronous Python function. Cons
 
 TODO:
 - implement transform and load phases of the ETL process
-- in the transform phase we will be using the geopandas toi make the borough paritions
+- in the transform phase we will be using the geopandas to make the borough paritions
 - need to merge the data from the various portions of the GBFS feed into a cohesive dataset
 - fix: the vehicle types data not coming in properly in the station status json
 """
