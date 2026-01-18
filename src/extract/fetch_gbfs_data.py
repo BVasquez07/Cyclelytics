@@ -1,8 +1,5 @@
 import asyncio
 import aiohttp
-
-
-
 """
 TODO: 
 - implement error handling, logging, and retries for robustness
@@ -11,18 +8,15 @@ TODO:
 
 """
 
-
-
-async def fetch_gbfs_data(url='https://gbfs.lyft.com/gbfs/2.3/bkn/gbfs.json', batch_size=100):
+async def fetch_gbfs_data(url: str='https://gbfs.lyft.com/gbfs/2.3/bkn/gbfs.json', batch_size: int=100) -> dict | None:
     print(url)
     async with aiohttp.ClientSession() as session:
         try:
             async with session.get(url) as response:
-                    return await response.json()
+                    return await response.json() #have to check this over to make sure the event loop is getting back the control
         except Exception as e:
             print(f"Error fetching data from {url}: {e}")
             return None
 
 if __name__ == "__main__":
-    print('hello world')
     asyncio.run(fetch_gbfs_data)
