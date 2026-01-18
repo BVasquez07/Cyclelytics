@@ -14,8 +14,6 @@ except OSError:
         f.write("PSQL_PORT='5430'\n")
         f.write("DB_NAME='cycleytics_warehouse'\n")
         f.write("CONNECTION_TIMEOUT=10\n")
-        f.write("aws_access_key_id=YOUR_ACCESS_KEY\n")
-        f.write("aws_secret_access_key=YOUR_SECRET_KEY\n")
         f.write("region=us-east-2\n")
         f.write("s3_bucket_name=cyclelytics-parquet-lake\n")
 finally:

@@ -31,6 +31,56 @@ Cyclelytics is a data and analytics starter for bike-share systems. Inspired by 
 3) **Configure**: update `config.py` with source locations (local paths or cloud buckets) and destinations.
 4) **Run the pipeline**: `python main.py`
 
+## AWS Credentials Configuration
+
+### ⚠️ CRITICAL SECURITY WARNING
+**NEVER hardcode AWS credentials directly in your code or configuration files.** Exposing your `aws_access_key_id` and `aws_secret_access_key` in plaintext creates serious security risks, including unauthorized access to your AWS resources, data breaches, and unexpected charges.
+
+### What NOT to Do
+❌ **Never** hardcode credentials in source code  
+❌ **Never** commit credentials to version control (Git, GitHub, etc.)  
+❌ **Never** include credentials in configuration files that are tracked by Git  
+❌ **Never** share credentials via email, chat, or other insecure channels
+
+### AWS Official Resources for Secure Credential Management
+
+AWS provides comprehensive documentation on how to properly configure and manage your credentials. Please refer to these official AWS resources to learn the recommended approaches:
+
+#### Primary Resources
+- **AWS Boto3 Credentials Guide** (Essential Reading):  
+  [https://boto3.amazonaws.com/v1/documentation/api/latest/guide/credentials.html](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/credentials.html)  
+  This guide covers all supported methods for configuring credentials, including configuration files, environment variables, IAM roles, and the credential provider chain.
+
+- **AWS Security Best Practices for IAM**:  
+  [https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html)  
+  Learn about IAM roles, least-privilege access, and rotating credentials.
+
+- **AWS CLI Configuration and Credential File Settings**:  
+  [https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)  
+  Details on setting up credential and config files for local development.
+
+#### For Production Environments
+- **AWS Secrets Manager**:  
+  [https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html)  
+  Securely store and automatically rotate credentials.
+
+- **Using IAM Roles for Amazon EC2**:  
+  [https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html)  
+  Eliminate the need for long-term credentials on EC2 instances.
+
+- **AWS Systems Manager Parameter Store**:  
+  [https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html)  
+  Store configuration data and credentials centrally.
+
+#### Additional Security Resources
+- **AWS Well-Architected Framework - Security Pillar**:  
+  [https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html)
+
+- **Managing Access Keys for IAM Users**:  
+  [https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)
+
+Before running this pipeline, ensure you have properly configured your AWS credentials following the guidance in the resources above.
+
 ## Pipeline Overview
 - **Extract**: ingest raw trips and station reference data into a landing zone.
 - **Transform**: standardize timestamps, compute trip durations, derive demand features, and build station/day aggregates.
