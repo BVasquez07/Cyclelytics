@@ -1,10 +1,8 @@
 from dotenv import load_dotenv
 import os
+from botocore.config import Config
 #will be refrencing the GBFS from the city bike data source found here: https://github.com/MobilityData/gbfs/blob/master/gbfs.md
-
 #can also check if there is a venv directory and create one if not found
-
-
 try:
     with open('.env', 'r') as f:
         pass # we don't really care to do anything if the file exists and the file will close automatically due to the with statement
@@ -16,6 +14,10 @@ except OSError:
         f.write("PSQL_PORT='5430'\n")
         f.write("DB_NAME='cycleytics_warehouse'\n")
         f.write("CONNECTION_TIMEOUT=10\n")
+        f.write("aws_access_key_id=YOUR_ACCESS_KEY\n")
+        f.write("aws_secret_access_key=YOUR_SECRET_KEY\n")
+        f.write("region=us-east-2\n")
+        f.write("s3_bucket_name=cyclelytics-parquet-lake\n")
 finally:
     print('.env file checked for existence!')
 
@@ -28,6 +30,16 @@ db_credentials = {
     "port": os.getenv(key="PSQL_PORT", default="No Key Found"),
     "database": os.getenv(key="DB_NAME", default="No Key Found"),
     "timeout": os.getenv(key="CONNECTION_TIMEOUT", default="No Key Found"),
+}
+s3_config = {
+    'bucket_name': os.getenv(key="s3_bucket_name", default="No Key Found"),
+    'botocore_config': Config(
+        region_name=os.getenv(key="region", default="us-east-2"),
+        retries = {
+            'max_attempts': 10,
+            'mode': 'standard'
+        }
+    )
 }
 
 gbfs_feed = {

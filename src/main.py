@@ -17,18 +17,15 @@ TODO:
 - in the transform phase we will be using the geopandas toi make the borough paritions
 - need to merge the data from the various portions of the GBFS feed into a cohesive dataset
 - fix: the vehicle types data not coming in properly in the station status json
-
-
-
 """
 import asyncio
 import pandas as pd
-import numpy as np
 from src.extract.fetch_gbfs_data import fetch_gbfs_data
-import tempfile
+from src.extract.lake_prqt_upload import create_and_upload_parquet
 import fastparquet
+import time
 
-async def run_etl(feed, batch_size: int =100, db_credentials: dict[dict[str]]=None) -> None:
+async def run_etl(feed, batch_size: int =100, db_credentials: dict[dict[str]]=None, s3_config_obj: object=None) -> None:
     #extract portion
     #there is an error with the vehicle types that doesn't come in!
     feed_tasks = [{}] #list of dicts to hold tasks for each task feed to simplify management
@@ -52,28 +49,20 @@ async def run_etl(feed, batch_size: int =100, db_credentials: dict[dict[str]]=No
     print(joined.info())
     print(joined.describe())
     print(joined.shape)
-    #creating the parquet files from the dataframe.
-
-    with tempfile.TemporaryDirectory() as temp_dir:
-        temp_file_path = f"{temp_dir}/temp_parquet.parquet"
-        try:
-            joined.to_parquet(temp_file_path, index=False, engine='fastparquet')
-            loaded_df = pd.read_parquet(temp_file_path, engine='fastparquet')
-        except Exception as e:
-            print(f"Error creating or loading parquet file: {e}")
-            raise e
-        finally:
-            print(loaded_df.head().T)
+    #creating the parquet files from the dataframe & storing into s3 parquet lake
 
 
+    await asyncio.create_task(create_and_upload_parquet(df=joined, s3_config_obj=s3_config_obj, file_key=f'gbfs_station_data.parquet{time.strftime("%Y%m%d-%H%M%S")}'))
 
     """
     TODO:
     [x] join all of the data that is relevant into one cohesive dataframe
         - the three to be joined are station info, station status, and vehicle_types
         -still have to 
-    [] create the parquet file(s) from the dataframe
-    [] store the parquet file(s) into the s3 data lake
+    [x] create the parquet file(s) from the dataframe
+    [X] store the parquet file(s) into the s3 data lake
+        - need to add redunancy for data integrity in the upload process so something standard is using the time 
+        - an alternative is to using some of the file contents so that lookup and reads are efficient
     """
 
     

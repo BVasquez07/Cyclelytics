@@ -7,4 +7,5 @@ fastparquet
 python-dotenv
 pytest
 pytest-cov
-boto3
+boto3[crt]
+botocore
