@@ -15,7 +15,7 @@ TODO:
 - revise and improve concurrency if needed!
 """
 
-async def create_and_upload_parquet(df: pd.DataFrame, s3_config_obj: str, file_key: str) -> None:
+async def create_and_upload_parquet(df: pd.DataFrame, s3_config_obj: dict, file_key: str) -> None:
     with tempfile.TemporaryDirectory() as temp_dir:
         temp_file_path = f"{temp_dir}/temp_parquet.parquet" #this file name has to be updated
         try:
