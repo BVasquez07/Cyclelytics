@@ -8,7 +8,7 @@ this is very important for understanding the event loop and properly managing it
 *** Extremely important note: 
 Unlike tasks, awaiting a coroutine does not hand control back to the event loop! Wrapping a coroutine in a task 
 first, then awaiting that would cede control. The behavior of await coroutine 
-is effectively the same as invoking a regular, synchronous Python function. Consider this program:
+is effectively the same as invoking a regular, synchronous Python function.
 
 ***
 
@@ -17,6 +17,7 @@ TODO:
 - in the transform phase we will be using the geopandas toi make the borough paritions
 - need to merge the data from the various portions of the GBFS feed into a cohesive dataset
 - fix: the vehicle types data not coming in properly in the station status json
+- restructure to make suire that event loop management is proper and efficient and concurrency is being used effectively!
 """
 import asyncio
 import pandas as pd
@@ -52,7 +53,7 @@ async def run_etl(feed, batch_size: int =100, db_credentials: dict[dict[str]]=No
     #creating the parquet files from the dataframe & storing into s3 parquet lake
 
 
-    await asyncio.create_task(create_and_upload_parquet(df=joined, s3_config_obj=s3_config_obj, file_key=f'gbfs_station_data.parquet{time.strftime("%Y%m%d-%H%M%S")}'))
+    await asyncio.create_task(create_and_upload_parquet(df=joined, s3_config_obj=s3_config_obj, file_key=f'gbfs_data/gbfs_station_data_{time.strftime("%Y%m%d-%H%M%S")}.parquet'))
 
     """
     TODO:

@@ -31,11 +31,11 @@ async def create_and_upload_parquet(df: pd.DataFrame, s3_config_obj: str, file_k
                                  CreateBucketConfiguration={'LocationConstraint': s3_config_obj['botocore_config'].region_name})
             except Exception as e:
                 print(f"Bucket creation may have failed or bucket already exists: {e}")
-        
             try:
                 #uploading file
-                s3.upload_file(temp_file_path, f'{s3_config_obj["bucket_name"]}/gbfs_data', file_key)
-                print(f"Successfully uploaded parquet file to s3://{s3_config_obj['bucket_name']}/gbfs_data/{file_key}")
+                s3.upload_file(temp_file_path, f'{s3_config_obj["bucket_name"]}', file_key)
+
+                print(f"Successfully uploaded parquet file to s3://{s3_config_obj['bucket_name']}/{file_key}")
             except Exception as e:
                 return f"Error uploading parquet file to S3: {e}"
             

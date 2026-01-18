@@ -38,7 +38,7 @@ s3_config = {
         retries = {
             'max_attempts': 10,
             'mode': 'standard'
-        }
+        },
     )
 }
 
