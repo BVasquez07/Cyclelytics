@@ -52,8 +52,10 @@ async def run_etl(feed, batch_size: int =100, db_credentials: dict[dict[str]]=No
     #creating the parquet files from the dataframe & storing into s3 parquet lake
 
 
-    await asyncio.create_task(create_and_upload_parquet(df=joined, s3_config_obj=s3_config_obj, file_key=f'gbfs_data/gbfs_station_data_{time.strftime("%Y%m%d-%H%M%S")}.parquet'))
+    create_and_upload_prqt_task = asyncio.create_task(create_and_upload_parquet(df=joined, s3_config_obj=s3_config_obj, file_key=f'gbfs_data/gbfs_station_data_{time.strftime("%Y%m%d-%H%M%S")}.parquet'))
+    await create_and_upload_prqt_task
 
+    print(create_and_upload_prqt_task.result())
     """
     TODO:
     [x] join all of the data that is relevant into one cohesive dataframe

@@ -19,7 +19,8 @@ async def create_and_upload_parquet(df: pd.DataFrame, s3_config_obj: dict, file_
     with tempfile.TemporaryDirectory() as temp_dir:
         temp_file_path = f"{temp_dir}/temp_parquet.parquet" #this file name has to be updated
         try:
-            df.to_parquet(temp_file_path, index=False, engine='fastparquet')
+            #we have to ensure that the columns have the appropriate data type
+            df.to_parquet(temp_file_path, index=False, engine='auto')
         except Exception as e:
             return f"Error creating parquet file: {e}"
         else:

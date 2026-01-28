@@ -1,0 +1,32 @@
+[project]
+name = "Cyclelytics"
+version = "0.1.0"
+requires-python = ">=3.11.0"
+dependencies = [
+    "pandas ==2.3.3",
+    "numpy ==2.4.1",
+    "pyarrow ==22.0.0",
+    "psycopg[binary] ==3.3.2",
+    "aiohttp ==3.13.3",
+    "fastparquet ==2025.12.0",
+    "python-dotenv ==1.2.1",
+    "pytest ==9.0.2",
+    "pytest-cov ==7.0.0",
+    "boto3[crt] ==1.42.29",
+    "botocore ==1.42.29"
+]
+authors = [
+  {name = "Brandon Vasquez", email = "brandon.vasquez.app@gmail.com"},
+]
+maintainers = [
+  {name = "Brandon Vasquez", email = "brandon.vasquez.app@gmail.com"}
+]
+description = "Turning bike-share data into insights with lightweight cloud pipelines and an intuitive dashboard."
+readme = "README.md"
+
+[project.scripts]
+runner = "main:main"
+
+
+
+

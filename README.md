@@ -26,10 +26,10 @@ Cyclelytics is a data and analytics starter for bike-share systems. Inspired by 
 - `docs/dashboard_images/` – placeholder folder for dashboard captures.
 
 ## Getting Started
-1) **Prerequisites**: Python 3.9+ and pip.
-2) **Install dependencies**: `pip install -r requirements.txt`
+1) **Prerequisites**: Python 3.9+ and [uv](https://docs.astral.sh/uv/).
+2) **Install dependencies**: `uv sync`
 3) **Configure**: update `config.py` with source locations (local paths or cloud buckets) and destinations.
-4) **Run the pipeline**: `python main.py`
+4) **Run the pipeline**: `uv run --active python main.py`
 
 ## AWS Credentials Configuration
 
