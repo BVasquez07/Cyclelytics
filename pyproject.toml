@@ -13,7 +13,8 @@ dependencies = [
     "pytest ==9.0.2",
     "pytest-cov ==7.0.0",
     "boto3[crt] ==1.42.29",
-    "botocore ==1.42.29"
+    "botocore ==1.42.29",
+    "geopandas[all]"
 ]
 authors = [
   {name = "Brandon Vasquez", email = "brandon.vasquez.app@gmail.com"},

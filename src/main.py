@@ -56,21 +56,14 @@ async def run_etl(feed, batch_size: int =100, db_credentials: dict[dict[str]]=No
     await create_and_upload_prqt_task
 
     print(create_and_upload_prqt_task.result())
-    """
-    TODO:
-    [x] join all of the data that is relevant into one cohesive dataframe
-        - the three to be joined are station info, station status, and vehicle_types
-        -still have to 
-    [x] create the parquet file(s) from the dataframe
-    [X] store the parquet file(s) into the s3 data lake
-        - need to add redunancy for data integrity in the upload process so something standard is using the time 
-        - an alternative is to using some of the file contents so that lookup and reads are efficient
-    """
-
-    
-
 
     #transform portion
+
+    #here the most transformation is to be done with converting the data into geospatial data for borough partitioning
+    #this will be done with geopandas and shapely libraries to make use of geospatial
+    
+    
+
 
 
 
