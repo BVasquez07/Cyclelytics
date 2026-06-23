@@ -2,8 +2,11 @@ name: Tests with Allure Report
 
 on: [push, pull_request]
 
+permissions:
+  contents: write
+
 jobs:
-  test:
+  test_and_generate_report:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
