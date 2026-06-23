@@ -3,18 +3,16 @@
 here the calculation of the lon and lat columns for the borough partitioning will be done
 
 
-- what we want to do is import the nybb file from geodatasets
-- 
+- import the nybb file from geodatasets
+- use that dataset to do a spatial join with the lon and lat columns from the gbfs df
 """
 import geopandas
+import geodatasets
+import pandas
 
 
-async def fetch_prqt_upload():
-    pass
-
-
-
-async def transform_geopandas_partition():
+async def transform_geopandas_partition(df: pandas.DataFrame) -> None:
+    
     pass
 
 
