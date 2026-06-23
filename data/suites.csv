@@ -1,0 +1,3 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","129","Testing the data can be fetched","tests.test_extract","2026-06-23","passed","2026-06-23","","fetch_gbfs_data_test","",""
+"","100","Testing the fetching of data and ensuring the data is coming back in the expected format","tests.test_extract","2026-06-23","passed","2026-06-23","","fetch_gbfs_data_test","",""
