@@ -31,6 +31,11 @@ Cyclelytics is a data and analytics starter for bike-share systems. Inspired by 
 3) **Configure**: update `config.py` with source locations (local paths or cloud buckets) and destinations.
 4) **Run the pipeline**: `uv run --active python main.py`
 
+## Test Reports
+View automated test reports here: **[Allure Test Reports](https://BVasquez07.github.io/Cyclelytics/)**
+
+These reports are automatically generated on every push to `main` and provide detailed insights into test execution, coverage, and results.
+
 ## AWS Credentials Configuration
 
 ### ⚠️ CRITICAL SECURITY WARNING
